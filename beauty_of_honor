@@ -1,6 +1,30 @@
-javascript:var honors=document.querySelector(".txt-total-record").childNodes[0].innerHTML.replaceAll(',',''),
+// javascript:
+var honors=document.querySelector(".txt-total-record").childNodes[0].innerHTML.replaceAll(',',''),
 objective=parseInt(prompt("Please enter your honor goal", "0")),
 d_honors=objective-honors;
+const link = document.createElement('link');
+link.href = 'https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap';
+link.rel = 'stylesheet';
+
+document.head.appendChild(link);
+var t=document.getElementsByClassName("cnt-event")[0];
+const table = document.createElement('table');
+table.style.borderCollapse = 'collapse';
+table.style.width = '85%';
+table.style.marginTop = '5px';
+table.style.marginBottom = '5px';
+table.style.margin="auto";
+table.style.fontFamily="sans-serif";
+const style = document.createElement('style');
+style.textContent = `
+  table td + td,
+  table th + th {
+    border-left: 1px solid black;
+  }
+`;
+document.head.appendChild(style);
+// table.style.boxShadow="0 0 20px rgba(0, 0, 0, 0.15)";
+// table.style.backgroundColor="rgba(0, 0, 0, 0.15)";
 
 var nm_honors={
     "NM250": 50000000,
@@ -16,14 +40,51 @@ var nm_honors={
     "Normal": 4000
 };
 
-var message = "Fights breakdown :\n"
+var res={}
 for (const [key, value] of Object.entries(nm_honors)){
     var fights=Math.floor(d_honors/value);
     d_honors-=fights*value;
     if (fights != 0){
-        message+=key + ": " + fights + "\n";
+        res[key]=fights;
     }
 }
-message+="Remainder: " + d_honors;
+res["Remainder"]=d_honors
 
-alert(message)
+const headerRow=document.createElement('tr');
+// headerRow.style.textShadow="0px 0px 2px rgb(0 0 255)";
+Object.keys(res).forEach(key => {
+    const th = document.createElement('th');
+    th.textContent=key
+    // th.style.border = '1px solid #ccc';
+    th.style.fontSize = "80%";
+    th.style.textAlign="center";
+    headerRow.appendChild(th);
+})
+table.appendChild(headerRow);
+
+const dataRow=document.createElement('tr');
+Object.values(res).forEach(data => {
+    const td = document.createElement('td');
+    td.textContent=data
+    // th.style.border = '1px solid #ccc';
+    td.style.fontSize = "80%";
+    td.style.textAlign="center";
+    dataRow.appendChild(td);
+})
+table.appendChild(dataRow)
+
+const title=document.createElement("div");
+title.textContent="Fights breakdown";
+title.style.position="absolute";
+title.style.top="25%";
+title.style.left="50%";
+title.style.color="white";
+title.style.fontFamily="'Charm', cursive";
+title.style.fontSize="20px";
+title.style.textShadow="0px 0px 5px rgb(0 0 255)";
+title.style.transform="translate(-50%, -50%)";
+const m=document.createElement("div");
+m.className="cnt-enemy-reward-result";
+m.appendChild(table)
+m.appendChild(title)
+t.insertBefore(m, t.children[4])
