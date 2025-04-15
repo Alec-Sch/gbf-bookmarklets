@@ -1,0 +1,65 @@
+javascript:
+var ressources = {};
+var ten=parseInt(Game.view.gachaModel.attributes.legend.lineup.filter(e=>Object.values(e).includes("Premium 10-Part Draw"))[0].legend_gacha_ticket_list[0].ticket_num),
+one=parseInt(Game.view.gachaModel.attributes.legend.lineup.filter(e=>Object.values(e).includes("Premium Draw"))[0].legend_gacha_ticket_list[0].ticket_num),
+xtal=parseInt(Game.view.gachaModel.attributes.user_info.user_money),rolls=10*ten+one+xtal/300;
+const link=document.createElement('link');
+link.href='https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap';
+link.rel='stylesheet';
+document.head.appendChild(link);
+
+ressources["Ten-Draw Tickets"]=ten;
+ressources["Draw Tickets"]=one;
+ressources["Crystals"]=xtal;
+
+const box = document.createElement("div");
+box.className="lis-lineup lis-silver";
+
+const boxShadow = document.createElement("div");
+boxShadow.style.padding="5px";
+boxShadow.style.marginTop="60px";
+boxShadow.style.marginBottom="20px";
+const textDiv = document.createElement("div");
+textDiv.style.textAlign="center";
+textDiv.textContent="You currently have -- "+Math.floor(rolls)+" -- rolls saved up";
+const textDiv2 = document.createElement("div");
+textDiv2.style.textAlign="center";
+textDiv2.style.marginTop="5px";
+textDiv2.textContent="This is "+(rolls/3).toLocaleString(void 0,{maximumFractionDigits:2})+"% of a spark!";
+
+const table=document.createElement("table");
+table.style.borderCollapse = 'collapse';
+table.style.width = '50%';
+table.style.marginTop = '50px';
+table.style.marginBottom = '5px';
+table.style.margin="auto";
+table.style.fontFamily="sans-serif";
+Object.keys(ressources).forEach(key => {
+    const tr=document.createElement('tr');
+    const th=document.createElement('th');
+    th.textContent=key;
+    const td = document.createElement('td');
+    td.textContent=ressources[key];
+    td.style.textAlign="center";
+    tr.appendChild(th);
+    tr.appendChild(td);
+    table.appendChild(tr)
+});
+const title=document.createElement("div");
+title.textContent="Spark helper";
+title.style.position="absolute";
+title.style.top="12%";
+title.style.left="50%";
+title.style.color="white";
+title.style.fontFamily="'Charm', cursive";
+title.style.fontSize="20px";
+title.style.textShadow="0px 0px 5px rgb(0 0 255)";
+title.style.transform="translate(-50%, -50%)";
+
+box.appendChild(title);
+boxShadow.appendChild(textDiv);
+boxShadow.appendChild(textDiv2);
+box.appendChild(boxShadow);
+box.appendChild(table);
+const parentDiv = document.getElementsByClassName("prt-lineup")[0];
+parentDiv.insertBefore(box, parentDiv.firstChild);
