@@ -46,7 +46,7 @@ Object.keys(ressources).forEach(key => {
     table.appendChild(tr)
 });
 const title=document.createElement("div");
-title.textContent="Spark helper";
+title.textContent="Spark calculator";
 title.style.position="absolute";
 title.style.top="12%";
 title.style.left="50%";
