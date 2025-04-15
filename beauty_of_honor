@@ -1,4 +1,4 @@
-// javascript:
+javascript:
 var honors=document.querySelector(".txt-total-record").childNodes[0].innerHTML.replaceAll(',',''),
 objective=parseInt(prompt("Please enter your honor goal", "0")),
 d_honors=objective-honors;
@@ -23,9 +23,6 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-// table.style.boxShadow="0 0 20px rgba(0, 0, 0, 0.15)";
-// table.style.backgroundColor="rgba(0, 0, 0, 0.15)";
-
 var nm_honors={
     "NM250": 50000000,
     "NM200": 14000000,
@@ -48,14 +45,11 @@ for (const [key, value] of Object.entries(nm_honors)){
         res[key]=fights;
     }
 }
-res["Remainder"]=d_honors
-
+res["Remainder"]=d_honors;
 const headerRow=document.createElement('tr');
-// headerRow.style.textShadow="0px 0px 2px rgb(0 0 255)";
 Object.keys(res).forEach(key => {
     const th = document.createElement('th');
-    th.textContent=key
-    // th.style.border = '1px solid #ccc';
+    th.textContent=key;
     th.style.fontSize = "80%";
     th.style.textAlign="center";
     headerRow.appendChild(th);
@@ -65,8 +59,7 @@ table.appendChild(headerRow);
 const dataRow=document.createElement('tr');
 Object.values(res).forEach(data => {
     const td = document.createElement('td');
-    td.textContent=data
-    // th.style.border = '1px solid #ccc';
+    td.textContent=data;
     td.style.fontSize = "80%";
     td.style.textAlign="center";
     dataRow.appendChild(td);
