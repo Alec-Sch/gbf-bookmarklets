@@ -24,8 +24,8 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 var nm_honors={
-    "NM250": 50000000,
-    "NM200": 14000000,
+    "NM250": 75000000,
+    "NM200": 20000000,
     "NM150": 4500000,
     "NM100": 3000000,
     "NM95": 1000000,
